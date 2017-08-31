@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: cf1e2122efa68b6479bab947d6241a8f
+timeCreated: 1503778360
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Wellbutrin
+  fontNames:
+  - Wellbutrin
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

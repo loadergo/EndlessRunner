@@ -29,6 +29,8 @@ namespace Assets.Scripts
         private Sun _sun;
 
         private static bool _IS_FIRST_LAUNCH = true;
+        public static int WATER_COST = 50;
+        public static int PARROT_COST = 100;
 
         public int Coins
         {
@@ -79,6 +81,11 @@ namespace Assets.Scripts
             _blackScreen.OpenScreen();
         }
 
+        private void Update()
+        {
+            CheckInput();
+        }
+
         private void InitializeScore()
         {
             Coins = PPrefs.Coins;
@@ -113,6 +120,26 @@ namespace Assets.Scripts
             BackgroungStartMove();
             _runIsStarted = true;
         }
+        private void CheckInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_runIsStarted)
+                {
+                    ClickOnTheScreen();
+                }
+                else
+                {
+                    StartRun();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.W) && _playerController.IsDrunk)
+            {
+                UseWater();
+            }
+        }
+
 
         private void BackgroungStartMove()
         {
@@ -153,8 +180,12 @@ namespace Assets.Scripts
 
         public void GetParrot()
         {
-            if (_haveParrot || Parrots <= 0) return;
-
+            if (_haveParrot) return;
+            if (Parrots <= 0)
+            {
+                _canvasController.ShowShopPanel();
+                return;
+            }
             _playerController.GetParrot();
             Parrots--;
             _haveParrot = true;
@@ -191,6 +222,26 @@ namespace Assets.Scripts
         {
             _canvasController.SetDieCanvas();
             BackgroungStopMove();
+        }
+
+        public void BuyWater()
+        {
+            if (Coins < WATER_COST) return;
+
+            Coins -= WATER_COST;
+            PPrefs.Coins = Coins;
+            WaterCount++;
+            PPrefs.Water = WaterCount;
+        }
+
+        public void BuyParrot()
+        {
+            if (Coins < PARROT_COST) return;
+
+            Coins -= PARROT_COST;
+            PPrefs.Coins = Coins;
+            Parrots++;
+            PPrefs.Parrots = Parrots;
         }
     }
 }

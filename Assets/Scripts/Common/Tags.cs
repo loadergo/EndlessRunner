@@ -8,5 +8,6 @@
         public const string SPIKE = "Spike";
         public const string COIN = "Coin";
         public const string RHUM = "Rhum";
+        public const string BOX = "Box";
     }
 }

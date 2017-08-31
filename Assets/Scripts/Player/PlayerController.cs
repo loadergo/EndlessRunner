@@ -44,8 +44,10 @@ namespace Assets.Scripts.Player
         private Animator _drunkMaskAnim;
         private GameController _gameController;
         private CanvasController _canvasController;
+        private CameraMovement _cameraMovement;
 
-        private bool _isDrunk;
+        public bool IsDrunk;
+        private bool _isDrunkTwice;
 
         private float _drunkTime;
         private float _drunkTimer;
@@ -62,6 +64,7 @@ namespace Assets.Scripts.Player
         {
             _gameController = FindObjectOfType<GameController>();
             _canvasController = FindObjectOfType<CanvasController>();
+            _cameraMovement = FindObjectOfType<CameraMovement>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
             _drunkMaskAnim = transform.Find("DrunkMask").GetComponent<Animator>();
@@ -96,6 +99,7 @@ namespace Assets.Scripts.Player
             {
                 _rigidbody.velocity = Vector2.zero;
                 _rigidbody.isKinematic = true;
+                _canMove = false;
             }
         }
 
@@ -277,18 +281,38 @@ namespace Assets.Scripts.Player
 
         public void GetRhum(float drunkTime)
         {
-            if (_haveParrot) return;
+            //if (_haveParrot && IsDrunk)
+            //{
+            //    LoseParrot(JumpAfterTrap.NoJump);
+            //    return;
+            //}
             SetPlayerDrunked(drunkTime);
         }
 
         private void SetPlayerDrunked(float drunkTime)
         {
             _anim.SetBool(AnimParameters.Player.IsDrunk, true);
-            _drunkMaskAnim.SetBool(AnimParameters.Player.IsDrunk, true);
             _canvasController.SetDrunkseeCanvasActive(true);
             _drunkTimer = 0f;
             _drunkTime = drunkTime;
-            _isDrunk = true;
+
+            if (IsDrunk)
+            {
+                if (_haveParrot)
+                {
+                    LoseParrot(JumpAfterTrap.NoJump);
+                }
+                else
+                {
+                    _drunkMaskAnim.SetBool(AnimParameters.Player.IsDrunk, true);
+                    _isDrunkTwice = true;
+                }
+            }
+            else
+            {
+                IsDrunk = true;
+                _cameraMovement.SetOnBlur(true);
+            }
         }
 
         public void SetPlayerIsNotDrunked()
@@ -296,13 +320,14 @@ namespace Assets.Scripts.Player
             _anim.SetBool(AnimParameters.Player.IsDrunk, false);
             _drunkMaskAnim.SetBool(AnimParameters.Player.IsDrunk, false);
             _canvasController.SetDrunkseeCanvasActive(false);
-            _isDrunk = false;
+            _cameraMovement.SetOnBlur(false);
+            IsDrunk = false;
         }
     
 
         private void DrunkTimer()
         {
-            if (!_isDrunk) return;
+            if (!IsDrunk) return;
 
             _drunkTimer += Time.deltaTime;
             if (_drunkTimer >= _drunkTime)

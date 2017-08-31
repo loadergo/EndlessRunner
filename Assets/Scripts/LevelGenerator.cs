@@ -75,17 +75,17 @@ public class LevelGenerator : MonoBehaviour
         BlockGroup newBlockGroup = InstantiateNextBlockGroup(checkedGroupBlock.gameObject);
         
         //calc custom random value
-        int rand = Random.Range(0, 1000);
+        int rand = Random.Range(0, 500);
         int randValue;
-        if (rand >= 500)
+        if (rand >= 300)
         {
             randValue = 0;
         }
-        else if (rand >= 100)
+        else if (rand >= 150)
         {
             randValue = 1;
         }
-        else if (rand >= 10)
+        else if (rand >= 20)
         {
             randValue = 2;
         }

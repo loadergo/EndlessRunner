@@ -19,7 +19,7 @@ public class FloorChecker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == Tags.FLOOR)
+        if (col.tag == Tags.FLOOR || col.tag == Tags.BOX)
         {
             if (!_playerController.IsAlive)
             {
@@ -34,7 +34,7 @@ public class FloorChecker : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.tag == Tags.FLOOR)
+        if (col.tag == Tags.FLOOR || col.tag == Tags.BOX)
         {
             _floorCollidersCount--;
             if (_floorCollidersCount == 0)

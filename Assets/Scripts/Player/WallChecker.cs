@@ -30,7 +30,7 @@ namespace Assets.Scripts.Player
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if ((col.tag == Tags.FLOOR /*|| col.tag == Tags.SPIKE*/))
+            if ((col.tag == Tags.FLOOR || col.tag == Tags.BOX /*|| col.tag == Tags.SPIKE*/))
             {
                 _wallsInCollider++;
                 _playerController.SetCanMove(false);
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Player
 
         private void OnTriggerExit2D(Collider2D col)
         {
-            if (_playerController.IsAlive && (col.tag == Tags.FLOOR /*|| col.tag == Tags.SPIKE*/))
+            if (_playerController.IsAlive && (col.tag == Tags.FLOOR || col.tag == Tags.BOX /*|| col.tag == Tags.SPIKE*/))
             {
                 _wallsInCollider--;
                 if (_wallsInCollider <= 0)

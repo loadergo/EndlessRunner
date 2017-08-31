@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a64b399c66b8e374db2087cf7a75a346
+timeCreated: 1503778833
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: pxlxxlcond
+  fontNames:
+  - pxlxxlcond
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
