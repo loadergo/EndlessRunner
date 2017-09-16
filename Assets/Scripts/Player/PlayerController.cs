@@ -42,6 +42,7 @@ namespace Assets.Scripts.Player
         private Rigidbody2D _rigidbody;
         private Animator _anim;
         private Animator _drunkMaskAnim;
+        private Animator _catchEffectAnim;
         private GameController _gameController;
         private CanvasController _canvasController;
         private CameraMovement _cameraMovement;
@@ -51,14 +52,14 @@ namespace Assets.Scripts.Player
 
         private float _drunkTime;
         private float _drunkTimer;
-        
-        private bool _haveParrot;
+
+        public bool HaveParrot;
 
         public float InvulnerabilityTime;
         public bool IsInvulnerable;
         private float _invulnerabilityTimer;
 
-        private static float POS_Y_TO_DISABLE_FALLING = -50;
+        private static float POS_Y_TO_DISABLE_FALLING = -30;
 
         private void Start ()
         {
@@ -68,7 +69,9 @@ namespace Assets.Scripts.Player
             _rigidbody = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
             _drunkMaskAnim = transform.Find("DrunkMask").GetComponent<Animator>();
+            _catchEffectAnim = transform.Find("CatchEffect").GetComponent<Animator>();
             _canMove = false;
+            HaveParrot = true;
             //_canStartRun = true;
             IsAlive = true;
             _speedUpValue = Acceleration * Speed;
@@ -100,6 +103,10 @@ namespace Assets.Scripts.Player
                 _rigidbody.velocity = Vector2.zero;
                 _rigidbody.isKinematic = true;
                 _canMove = false;
+                if (IsAlive)
+                {
+                    IsAlive = false;
+                }
             }
         }
 
@@ -150,6 +157,7 @@ namespace Assets.Scripts.Player
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
             _anim.SetTrigger(AnimParameters.Player.Jump);
+            SoundManager.Instance.PlaySound(Sounds.Jump);
             _canJump = false;
         }
 
@@ -174,6 +182,7 @@ namespace Assets.Scripts.Player
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.isKinematic = true;
             _anim.SetTrigger(AnimParameters.Player.DieJump);
+            SoundManager.Instance.PlaySound(Sounds.Die);
         }
 
         /// <summary>
@@ -182,7 +191,7 @@ namespace Assets.Scripts.Player
         /// <returns></returns>
         private bool CheckParrotHaving(JumpAfterTrap jumpAfterTrap)
         {
-            if (!_haveParrot) return false;
+            if (!HaveParrot) return false;
             LoseParrot(jumpAfterTrap);
             return true;
         }
@@ -242,6 +251,7 @@ namespace Assets.Scripts.Player
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.isKinematic = true;
             _anim.SetTrigger(AnimParameters.Player.DieBeatWall);
+            SoundManager.Instance.PlaySound(Sounds.Die);
         }
 
         public void FallAfterDieByBeatWall()
@@ -266,6 +276,7 @@ namespace Assets.Scripts.Player
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.isKinematic = true;
             _anim.SetTrigger(AnimParameters.Player.DieBurn);
+            SoundManager.Instance.PlaySound(Sounds.Die);
         }
 
         public void GetCoin()
@@ -276,6 +287,11 @@ namespace Assets.Scripts.Player
         public void DiePitFall()
         {
             IsAlive = false;
+            SoundManager.Instance.PlaySound(Sounds.PitFall);
+            if (!HaveParrot)
+            {
+                _anim.SetTrigger(AnimParameters.Player.DiePitFall);
+            }
             StartCoroutine(StopMovingOnGround(Speed > 0));
         }
 
@@ -286,7 +302,9 @@ namespace Assets.Scripts.Player
             //    LoseParrot(JumpAfterTrap.NoJump);
             //    return;
             //}
+            _catchEffectAnim.SetTrigger(AnimParameters.CatchEffect.Catch);
             SetPlayerDrunked(drunkTime);
+            SoundManager.Instance.PlaySound(Sounds.Rhum);
         }
 
         private void SetPlayerDrunked(float drunkTime)
@@ -298,7 +316,7 @@ namespace Assets.Scripts.Player
 
             if (IsDrunk)
             {
-                if (_haveParrot)
+                if (HaveParrot)
                 {
                     LoseParrot(JumpAfterTrap.NoJump);
                 }
@@ -338,14 +356,19 @@ namespace Assets.Scripts.Player
 
         public void GetParrot()
         {
+            if (HaveParrot) return;
+            _canvasController.SetParrotBoostCanvasActive(false);
             _anim.SetTrigger(AnimParameters.Player.GetParrot);
-            _haveParrot = true;
+            SoundManager.Instance.PlaySound(Sounds.GetParrot);
+            HaveParrot = true;
         }
 
         public void LoseParrot(JumpAfterTrap jumpAfterTrap)
         {
+            _canvasController.SetParrotBoostCanvasActive(true);
             _anim.SetTrigger(AnimParameters.Player.LoseParrot);
-            _haveParrot = false;
+            SoundManager.Instance.PlaySound(Sounds.LoseParrot);
+            HaveParrot = false;
             StartInvulnerabilityTimer();
             if (jumpAfterTrap == JumpAfterTrap.NoJump)
             {

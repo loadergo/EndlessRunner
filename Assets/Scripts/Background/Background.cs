@@ -1,17 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts.Background;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Background : SunDependent
+namespace Assets.Scripts.Background
 {
-
-    protected override void SetNightSprite()
+    public class Background : SunDependent
     {
-        NightSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
-    }
+        protected override void SetNightSprite()
+        {
+            NightSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        }
 
-    protected override void CustomUpdate()
-    {
+        protected override void CustomUpdate()
+        {
+        }
     }
 }

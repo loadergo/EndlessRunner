@@ -98,7 +98,7 @@ namespace Assets.Scripts
             {
                 Parrots = 5;
                 PPrefs.Parrots = Parrots;
-                Coins = 100;
+                Coins = 2000;
                 PPrefs.Coins = Coins;
                 WaterCount = 5;
                 PPrefs.Water = WaterCount;
@@ -112,14 +112,16 @@ namespace Assets.Scripts
         public void StartRun()
         {
             _playerController.StartRun();
-            if (_haveParrot)
-            {
-                PPrefs.Parrots = Parrots;
-            }
+            //if (_haveParrot)
+            //{
+            //    PPrefs.Parrots = Parrots;
+            //}
             _canvasController.SetInGameCanvas();
             BackgroungStartMove();
             _runIsStarted = true;
+            SoundManager.Instance.PlayMainGameMusic();
         }
+
         private void CheckInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -137,6 +139,11 @@ namespace Assets.Scripts
             if (Input.GetKeyDown(KeyCode.W) && _playerController.IsDrunk)
             {
                 UseWater();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && !_playerController.HaveParrot)
+            {
+                GetParrot();
             }
         }
 
@@ -173,6 +180,7 @@ namespace Assets.Scripts
 
         public void GetCoin()
         {
+            SoundManager.Instance.PlaySound(Sounds.Coin);
             Coins++;
             PPrefs.Coins = Coins;
             _canvasController.SetCoins(Coins);
@@ -180,16 +188,21 @@ namespace Assets.Scripts
 
         public void GetParrot()
         {
-            if (_haveParrot) return;
-            if (Parrots <= 0)
-            {
-                _canvasController.ShowShopPanel();
-                return;
-            }
+            if (Parrots <= 0) return;
+                //if (_haveParrot) return;
+                //if (Parrots <= 0)
+                //{
+                //    _canvasController.ShowShopPanel();
+                //    return;
+                //}
+
+            if (!_playerController.IsAlive || _playerController.HaveParrot) return;
             _playerController.GetParrot();
             Parrots--;
-            _haveParrot = true;
+            PPrefs.Parrots = Parrots;
+            //_haveParrot = true;
         }
+        
 
         public void AddRunScore(int amount)
         {
@@ -208,6 +221,8 @@ namespace Assets.Scripts
 
         public void UseWater()
         {
+            if (WaterCount <= 0) return;
+
             WaterCount--;
             PPrefs.Water = WaterCount;
             _playerController.SetPlayerIsNotDrunked();
@@ -222,6 +237,7 @@ namespace Assets.Scripts
         {
             _canvasController.SetDieCanvas();
             BackgroungStopMove();
+            SoundManager.Instance.StopMainGameMusic();
         }
 
         public void BuyWater()

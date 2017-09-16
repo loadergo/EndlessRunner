@@ -19,6 +19,7 @@ namespace Assets.Scripts.Background
 
         private SpriteRenderer _spriteRenderer;
         private GameController _gameController;
+        private LevelGenerator _levelGenerator;
 
         private bool _isRising;
         private bool _isFalling;
@@ -34,6 +35,7 @@ namespace Assets.Scripts.Background
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _gameController = FindObjectOfType<GameController>();
+            _levelGenerator = FindObjectOfType<LevelGenerator>();
             _currRiseSpeed = RiseSpeed;
             _currRiseSmoothCoef = RiseSmoothCoef;
             _isNight = false;

@@ -4,7 +4,7 @@ namespace Assets.Scripts.Background
 {
     public abstract class SunDependent : MonoBehaviour {
     
-        public float ChangeNightColorSpeed;
+        public static float ChangeNightColorSpeed = 0.3f;
 
         protected SpriteRenderer NightSprite;
 

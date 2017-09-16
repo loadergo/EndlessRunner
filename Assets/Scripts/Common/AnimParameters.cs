@@ -47,6 +47,11 @@
             /// <summary>
             /// Trigger parameter
             /// </summary>
+            public static string DiePitFall = "DiePitFall";
+
+            /// <summary>
+            /// Trigger parameter
+            /// </summary>
             public static string DieBurn = "DieBurn";
 
             /// <summary>
@@ -72,6 +77,14 @@
             /// Trigger parameter
             /// </summary>
             public static string Close = "Close";
+        }
+
+        public static class CatchEffect
+        {
+            /// <summary>
+            /// Trigger parameter
+            /// </summary>
+            public static string Catch = "Catch";
         }
     }
 }

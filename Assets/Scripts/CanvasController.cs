@@ -30,6 +30,9 @@ namespace Assets.Scripts
 
         public GameObject ShopPanel;
 
+        private bool _isMaxParrots;
+        private bool _isMaxWater;
+
 
         private void Awake ()
         {
@@ -46,6 +49,7 @@ namespace Assets.Scripts
 
         public void SetDieCanvas()
         {
+            SetParrotBoostCanvasActive(false);
             TryAgainButton.gameObject.SetActive(true);
             StartCoroutine(SetActiveAfterTime(GameOverText, true, 1f));
         }
@@ -62,8 +66,8 @@ namespace Assets.Scripts
         {
             CoinsText.text = value.ToString();
             ShopCoinsText.text = value.ToString();
-            BuyParrotButton.interactable = GameController.PARROT_COST <= value;
-            BuyWaterButton.interactable = GameController.WATER_COST <= value;
+            BuyParrotButton.interactable = (GameController.PARROT_COST <= value && !_isMaxParrots);
+            BuyWaterButton.interactable = (GameController.WATER_COST <= value && !_isMaxWater);
         }
 
         public void SetCurrentScore(int value)
@@ -82,20 +86,29 @@ namespace Assets.Scripts
         public void SetParrotsCount(int value)
         {
             _parrotsCountText.text = value.ToString();
-            ShopParrotsCountText.text = value.ToString();
-            //ParrotButton.interactable = value > 0;
+            ParrotButton.interactable = value > 0;
+                _isMaxParrots = value >= 10;
+                BuyParrotButton.interactable = !_isMaxParrots;
+            ShopParrotsCountText.text = value >= 10 ? "MAX" : value.ToString();
         }
 
         public void SetWaterCount(int value)
         {
             _waterCountText.text = value.ToString();
-            ShopWaterCountText.text = value.ToString();
             WaterButton.interactable = value > 0;
+                _isMaxWater = value >= 10;
+                BuyWaterButton.interactable = !_isMaxWater;
+            ShopWaterCountText.text = value >= 10 ? "MAX" : value.ToString();
         }
 
         public void SetDrunkseeCanvasActive(bool isActive)
         {
             WaterButton.gameObject.SetActive(isActive);
+        }
+
+        public void SetParrotBoostCanvasActive(bool isActive)
+        {
+            ParrotButton.gameObject.SetActive(isActive);
         }
 
         public void ShowShopPanel()
