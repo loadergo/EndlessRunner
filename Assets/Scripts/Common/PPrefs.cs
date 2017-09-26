@@ -40,6 +40,29 @@ namespace Assets.Scripts.Common
         //    get { return PlayerPrefs.GetInt("LastPlayedDate"); }
         //    set { PlayerPrefs.SetInt("Parrots", value); }
         //}
-    
+
+        public static bool Mute
+        {
+            get
+            {
+                return PlayerPrefs.GetInt("Mute") != 0;
+            }
+            set
+            {   int val = value ? 1 : 0;
+                PlayerPrefs.SetInt("Mute", val);
+            }
+        }
+
+        public static bool IsFirstLaunch
+        {
+            get
+            {
+                return PlayerPrefs.GetInt("IsFirstLaunch") == 0;
+            }
+            set
+            {   int val = value ? 0 : 1;
+                PlayerPrefs.SetInt("IsFirstLaunch", val);
+            }
+        }
     }
 }

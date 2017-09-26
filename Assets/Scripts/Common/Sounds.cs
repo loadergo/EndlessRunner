@@ -5,9 +5,12 @@
         Jump,
         Coin,
         Rhum,
+        Water,
         GetParrot,
         LoseParrot,
         Die,
-        PitFall
+        DieBurn,
+        PitFall,
+        PitFallWithParrot
     }
 }

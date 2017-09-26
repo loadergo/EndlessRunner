@@ -28,7 +28,7 @@ namespace Assets.Scripts
         private BlackScreen _blackScreen;
         private Sun _sun;
 
-        private static bool _IS_FIRST_LAUNCH = true;
+        //private static bool _IS_FIRST_LAUNCH = true;
         public static int WATER_COST = 50;
         public static int PARROT_COST = 100;
 
@@ -94,17 +94,16 @@ namespace Assets.Scripts
             Parrots = PPrefs.Parrots;
             WaterCount = PPrefs.Water;
 
-            if (_IS_FIRST_LAUNCH)
+            if (PPrefs.IsFirstLaunch)
             {
                 Parrots = 5;
                 PPrefs.Parrots = Parrots;
-                Coins = 2000;
+                Coins = 100;
                 PPrefs.Coins = Coins;
                 WaterCount = 5;
                 PPrefs.Water = WaterCount;
-
-
-                _IS_FIRST_LAUNCH = false;
+                
+                PPrefs.IsFirstLaunch = false;
             }
             
         }
@@ -225,6 +224,7 @@ namespace Assets.Scripts
 
             WaterCount--;
             PPrefs.Water = WaterCount;
+            SoundManager.Instance.PlaySound(Sounds.Water);
             _playerController.SetPlayerIsNotDrunked();
         }
 

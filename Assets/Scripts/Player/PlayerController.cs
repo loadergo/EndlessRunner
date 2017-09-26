@@ -276,7 +276,7 @@ namespace Assets.Scripts.Player
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.isKinematic = true;
             _anim.SetTrigger(AnimParameters.Player.DieBurn);
-            SoundManager.Instance.PlaySound(Sounds.Die);
+            SoundManager.Instance.PlaySound(Sounds.DieBurn);
         }
 
         public void GetCoin()
@@ -287,10 +287,14 @@ namespace Assets.Scripts.Player
         public void DiePitFall()
         {
             IsAlive = false;
-            SoundManager.Instance.PlaySound(Sounds.PitFall);
             if (!HaveParrot)
             {
                 _anim.SetTrigger(AnimParameters.Player.DiePitFall);
+                SoundManager.Instance.PlaySound(Sounds.PitFall);
+            }
+            else
+            {
+                SoundManager.Instance.PlaySound(Sounds.PitFallWithParrot);
             }
             StartCoroutine(StopMovingOnGround(Speed > 0));
         }

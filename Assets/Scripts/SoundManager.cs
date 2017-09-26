@@ -1,6 +1,8 @@
 ﻿using System;
 using Assets.Scripts.Common;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -8,13 +10,20 @@ namespace Assets.Scripts
     {
         public static SoundManager Instance = null;
 
+        public AudioMixer MainAudioMixer;
+        public Toggle MuteToggle;
+
         public AudioSource MainGamaMusic;
         public AudioSource JumpSound;
         public AudioSource CoinSound;
         public AudioSource RhumSound;
-        public AudioSource GetAndLoseParrotSound;
+        public AudioSource WaterSound;
+        public AudioSource GetParrotSound;
+        public AudioSource LoseParrotSound;
         public AudioSource DieMainSound;
+        public AudioSource DieBurnSound;
         public AudioSource DiePitFallSound;
+        public AudioSource DiePitFallWithParrotSound;
 
 
         void Awake()
@@ -32,7 +41,6 @@ namespace Assets.Scripts
 
         private void Start()
         {
-		
         }
 
         public void PlaySound(Sounds sound)
@@ -49,16 +57,25 @@ namespace Assets.Scripts
                     RhumSound.Play();
                     break;
                 case Sounds.GetParrot:
-                    GetAndLoseParrotSound.Play();
+                    GetParrotSound.Play();
                     break;
                 case Sounds.LoseParrot:
-                    GetAndLoseParrotSound.Play();
+                    LoseParrotSound.Play();
                     break;
                 case Sounds.Die:
                     DieMainSound.Play();
                     break;
                 case Sounds.PitFall:
                     DiePitFallSound.Play();
+                    break;
+                case Sounds.Water:
+                    WaterSound.Play();
+                    break;
+                case Sounds.DieBurn:
+                    DieBurnSound.Play();
+                    break;
+                case Sounds.PitFallWithParrot:
+                    DiePitFallWithParrotSound.Play();
                     break;
             }
         }
@@ -73,5 +90,6 @@ namespace Assets.Scripts
             MainGamaMusic.Stop();
         }
 
+       
     }
 }

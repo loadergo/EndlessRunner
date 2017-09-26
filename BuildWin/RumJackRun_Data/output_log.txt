@@ -1,0 +1,42 @@
+Initialize engine version: 5.6.3f1 (d3101c3b8468)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 820M (ID=0x1140)
+    Vendor:   NVIDIA
+    VRAM:     1983 MB
+    Driver:   21.21.13.7654
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.038 seconds
+Platform assembly: C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Dmitry\Documents\GitHub\EndlessRunner\BuildWin\RumJackRun_Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 3.073450 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 11c4 -> priority: 1 
+  Thread -> id: 1ca0 -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.745369 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 2548.
+Total: 1.580949 ms (FindLiveObjects: 0.460611 ms CreateObjectMapping: 0.161513 ms MarkObjects: 0.931478 ms  DeleteObjects: 0.023927 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.748558 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 2584.
+Total: 1.252368 ms (FindLiveObjects: 0.211078 ms CreateObjectMapping: 0.120921 ms MarkObjects: 0.900713 ms  DeleteObjects: 0.017091 ms)
+
