@@ -98,7 +98,7 @@ namespace Assets.Scripts.Player
 
         private void CheckPositionToDisableEndlesslyFalling()
         {
-            if (transform.position.y < POS_Y_TO_DISABLE_FALLING)
+            if (transform.localPosition.y < POS_Y_TO_DISABLE_FALLING)
             {
                 _rigidbody.velocity = Vector2.zero;
                 _rigidbody.isKinematic = true;
